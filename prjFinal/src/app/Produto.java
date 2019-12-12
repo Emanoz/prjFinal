@@ -53,7 +53,7 @@ public abstract class Produto {
     }
 
     public double getPreco() {
-        return preco;
+        return preco * moeda;
     }
 
     public void setPreco(double preco) {

@@ -5,6 +5,8 @@
  */
 package app;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -178,7 +180,7 @@ public class AppMenu {
                                 System.out.println("Deseja adicionar mais algum produto? <S/N>");
                                 oppp = s.next();
                             }while(oppp.equals("s") || oppp.equals("S"));
-                            ped = new Pedido(++codPedido, null, 1, itens);
+                            ped = new Pedido(++codPedido, new Date(), 1, itens);
                             if(ped.totalPedido() <= c.getLimite()){
                                 c.setPedidos(ped);
                                 ped.setCliente(c);
@@ -207,6 +209,7 @@ public class AppMenu {
                                 for(Pedido pedido : c.getPedidos()){
                                     System.out.println("\n------------------------\n");
                                     pedido.mostrarItens();
+                                    System.out.println("Valor total: " + pedido.totalPedido());
                                 }
                                 System.out.println("Informe o numero do pedido que sera finalizado: ");
                                 ped = searchPedido(s.nextInt(), c.getPedidos());
@@ -260,5 +263,10 @@ public class AppMenu {
                 return p;
         }
         return null;
+    }
+    
+    private String getDateTime(Date data){
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.format(data);
     }
 }

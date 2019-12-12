@@ -89,7 +89,6 @@ public class Pedido {
     public void mostrarItens(){
         System.out.println("Numero: " + numero + "\nData: " + data + "\nPedidos: [");
         for(ItemPedido item : itens)
-            System.out.println("\n" + item.toString());
-        System.out.println("]");
+            System.out.println("\n" + item.toString() + "]");
     }
 }
