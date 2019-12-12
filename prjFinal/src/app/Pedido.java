@@ -14,15 +14,18 @@ import java.util.Date;
  */
 public class Pedido {
 
-    public Pedido(long numero, Date data) {
+    public Pedido(long numero, Date data, int status, ArrayList<ItemPedido> itens) {
         this.numero = numero;
         this.data = data;
+        this.status = status;
+        this.itens = itens;
     }
     
     private long numero;
     private Date data;
     private ArrayList<ItemPedido> itens = new ArrayList<>();
     private Cliente cliente = null;
+    private int status;
 
     public long getNumero() {
         return numero;
@@ -55,6 +58,17 @@ public class Pedido {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public String getStatus() {
+        if(status == 0)
+            return "Finalizado";
+        else
+            return "Aberto";
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
     
     public double totalPedido(){
         double total = 0;
@@ -71,17 +85,11 @@ public class Pedido {
         }
         return total;
     }
-
-    @Override
-    public String toString() {
-        return "Pedido{" + "numero=" + numero + ", data=" + data + ", cliente=" + cliente + '}';
-    }
-
-    void addItem(Produto prod, int nextInt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    Iterable<ItemPedido> getItems() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public void mostrarItens(){
+        System.out.println("Numero: " + numero + "\nData: " + data + "\nPedidos: [");
+        for(ItemPedido item : itens)
+            System.out.println("\n" + item.toString());
+        System.out.println("]");
     }
 }

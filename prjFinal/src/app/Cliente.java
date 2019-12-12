@@ -13,22 +13,13 @@ import java.util.ArrayList;
  */
 public class Cliente {
 
-    public Cliente(int codigo, String nome, String endereco, String telefone, int status, double limite) {
+    public Cliente(int codigo, String nome, String endereco, String telefone, double limite) {
         this.codigo = codigo;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
-        this.status = status;
         this.limite = limite;
     }
-    
-    public Cliente(int codigo, String nome, String endereco, String telefone) {
-        this.codigo = codigo;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.telefone = telefone;
-    }
-    
     public Cliente(){
         
     }
@@ -37,7 +28,6 @@ public class Cliente {
     private String nome;
     private String endereco;
     private String telefone;
-    private int status;
     private double limite;
     private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 
@@ -73,14 +63,6 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public double getLimite() {
         return limite;
     }
@@ -99,6 +81,6 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "codigo=" + codigo + ", nome=" + nome + ", endereco=" + endereco + ", telefone=" + telefone + ", status=" + status + ", limite=" + limite + '}';
+        return "Codigo: " + codigo + "\nNome: " + nome + "\nEndereco: " + endereco + "\nTelefone: " + telefone + "\nLimite: " + limite + "\n";
     }
 }

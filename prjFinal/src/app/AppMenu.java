@@ -27,22 +27,24 @@ public class AppMenu {
         Pedido ped = null;
         
         do{
-            System.out.println("1.Cliente\n2.Produto\n3.Categoria\n4.Criar pedidos para um cliente\n6.Sair");
+            System.out.println("1.Cliente\n2.Produto\n3.Categoria\n4.Criar pedidos para um cliente\n5.Listar pedidos de um cliente\n6"
+                    + ".Dar baixa de um pedido\n7.Sai\n");
             op = s.nextInt();
             switch(op){
                 case 1: System.out.println("\n\n1.Cadastrar\n2.Atualizar\n3.Remover\n4.Pesquisar\n5.Listar todos");
                         opInterno = s.nextInt();
                         switch(opInterno){
-                            case 1: System.out.println("Informe o nome, endereco, e telefone do cliente: ");
-                                    cliList.add(new Cliente(++codCli, s.next(), s.next(), s.next()));
+                            case 1: System.out.println("Informe o nome, endereco, telefone e o limite de saldo do cliente: ");
+                                    cliList.add(new Cliente(++codCli, s.next(), s.next(), s.next(), s.nextDouble()));
                                     break;
                             case 2: System.out.println("Informe o nome do cliente:");
                                     c = searchCliente(s.next(), cliList);
                                     if(c != null){
-                                        System.out.println("Informe o nome, endereco, e telefone do cliente:");
+                                        System.out.println("Informe o nome, endereco, telefone e o limite de saldo do cliente:");
                                         c.setNome(s.next());
                                         c.setEndereco(s.next());
                                         c.setTelefone(s.next());
+                                        c.setLimite(s.nextDouble());
                                     }else
                                         System.out.println("O cliente não foi encontrado");
                                     break;
@@ -165,7 +167,7 @@ public class AppMenu {
                             System.out.println("Listagem dos produtos disponiveis:\n");
                             for(Produto prod : prodList)
                                 System.out.println(prod.toString());
-                            System.out.println("\nInforme os produtos que serao adicionados e suas quantidades: \n");
+                            System.out.println("\nInforme os produtos que serao adicionados e suas quantidades:\n");
                             String oppp = "";
                             do{
                                 Produto prod = searchProduto(s.next(), prodList);
@@ -176,34 +178,55 @@ public class AppMenu {
                                 System.out.println("Deseja adicionar mais algum produto? <S/N>");
                                 oppp = s.next();
                             }while(oppp.equals("s") || oppp.equals("S"));
-                            ped = new Pedido(++codPedido, null);
-                            c.setPedidos(ped);
-                            ped.setCliente(c);
+                            ped = new Pedido(++codPedido, null, 1, itens);
+                            if(ped.totalPedido() <= c.getLimite()){
+                                c.setPedidos(ped);
+                                ped.setCliente(c);
+                                c.setLimite(c.getLimite() - ped.totalPedido());
+                            }else
+                                System.out.println("O limite do saldo deste cliente foi extrapolado! O pedido sera cancelado");
+                                
                         } else
                             System.out.println("Cliente nao encontrado");
                     break;
-                case 5:
-                    System.out.println("Informe o nome do cliente: ");
-                    Cliente cli = searchCliente(s.next(), cliList);
-                    if(cli != null){
-                        for(Pedido pedido : cli.getPedidos()){
-                            System.out.println(pedido.toString());
-                            for(ItemPedido i : pedido.getItems())
-                                System.out.println(i.toString());
-                            System.out.println("\nTotal do pedido: " + pedido.totalPedido());
-                        }
-                    }
-                    else
-                        System.out.println("ERRO! Cliente não existe em nossa base de dados");
+                case 5: System.out.println("Informe o nome do cliente: ");
+                        c = searchCliente(s.next(), cliList);
+                        if(c != null){
+                            for(Pedido pedido : c.getPedidos()){
+                                System.out.println("\n------------------------\n");
+                                pedido.mostrarItens();
+                            }
+                                
+                        }else
+                            System.out.println("O cliente nao foi encontrado");
                     break;
-                case 6:
+                case 6: System.out.println("Informe o nome do cliente em que o pedido sera finalizado: ");
+                        c = searchCliente(s.next(), cliList);
+                        if(c != null){
+                            if(c.getPedidos().size() > 0){
+                                for(Pedido pedido : c.getPedidos()){
+                                    System.out.println("\n------------------------\n");
+                                    pedido.mostrarItens();
+                                }
+                                System.out.println("Informe o numero do pedido que sera finalizado: ");
+                                ped = searchPedido(s.nextInt(), c.getPedidos());
+                                if(ped != null){
+                                    ped.setStatus(0);
+                                    c.setLimite(c.getLimite() + ped.totalPedido());
+                                    c.getPedidos().remove(ped);
+                                }else
+                                    System.out.println("Este pedido nao existe");
+                            }else
+                                System.out.println("Este cliente nao possui pedidos abertos");
+                        }else
+                            System.out.println("Este cliente nao foi encontrado");
                     break;
                 default:
                     System.out.println("Opção inexistente, insira um valor valido.");
                     break;
             }
             
-        } while(op != 6);
+        } while(op != 7);
         
     }
     

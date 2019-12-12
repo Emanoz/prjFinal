@@ -28,6 +28,7 @@ public class ProdutoMercadoInterno extends Produto{
 
     @Override
     public String toString() {
-        return "ProdutoMercadoInterno{" + "incentivo=" + incentivo + '}';
+        return "Ha incentivo?: " + incentivo + "\nDescricao: " + getNome() + "\nCategoria: " + getCategoria().getDescricao() 
+                + "\nPreco: " + getPreco() + "\nMoeda: " + getMoeda() + "\nImposto: " + getImposto() + "\n";
     }
 }

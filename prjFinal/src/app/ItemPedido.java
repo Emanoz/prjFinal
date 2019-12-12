@@ -51,6 +51,6 @@ public class ItemPedido {
     
     @Override
     public String toString() {
-        return "ItemPedido{" + "numero=" + numero + ", quantidade=" + quantidade + ", produto=" + produto + '}';
+        return "Numero: " + numero + "\nQuantidade: " + quantidade + "\nProduto: " + produto.getNome() + "\n";
     }
 }
