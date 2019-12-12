@@ -9,7 +9,8 @@ package app;
  *
  * @author emanu
  */
-public class Produto {
+public abstract class Produto {
+    
 
     public Produto(int codigo, String nome, Categoria categoria, double preco, int moeda, double imposto) {
         this.codigo = codigo;
@@ -73,10 +74,5 @@ public class Produto {
 
     public void setImposto(double imposto) {
         this.imposto = imposto;
-    }
-
-    @Override
-    public String toString() {
-        return "Produto{" + "codigo=" + codigo + ", nome=" + nome + ", categoria=" + categoria + ", preco=" + preco + ", moeda=" + moeda + ", imposto=" + imposto + '}';
-    }
+    }  
 }

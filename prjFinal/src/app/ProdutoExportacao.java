@@ -28,6 +28,7 @@ public class ProdutoExportacao extends Produto{
 
     @Override
     public String toString() {
-        return "ProdutoExportacao{" + "destino=" + destino + '}';
+        return "ProdutoExportacao{" + "destino=" + destino + ", descricao=" + getNome() + ", categoria=" + getCategoria().getDescricao() 
+                + ", preco=" + getPreco() + ", moeda=" + getMoeda() + ", imposto=" + getImposto() + '}';
     }
 }

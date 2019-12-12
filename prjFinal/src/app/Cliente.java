@@ -22,6 +22,13 @@ public class Cliente {
         this.limite = limite;
     }
     
+    public Cliente(int codigo, String nome, String endereco, String telefone) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.telefone = telefone;
+    }
+    
     public Cliente(){
         
     }
@@ -86,8 +93,8 @@ public class Cliente {
         return pedidos;
     }
 
-    public void setPedidos(ArrayList<Pedido> pedidos) {
-        this.pedidos = pedidos;
+    public void setPedidos(Pedido pedidos) {
+        this.pedidos.add(pedidos);
     }
 
     @Override

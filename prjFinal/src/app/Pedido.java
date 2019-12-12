@@ -76,4 +76,12 @@ public class Pedido {
     public String toString() {
         return "Pedido{" + "numero=" + numero + ", data=" + data + ", cliente=" + cliente + '}';
     }
+
+    void addItem(Produto prod, int nextInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    Iterable<ItemPedido> getItems() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
